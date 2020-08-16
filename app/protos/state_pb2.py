@@ -19,7 +19,7 @@ DESCRIPTOR = _descriptor.FileDescriptor(
   syntax='proto2',
   serialized_options=None,
   create_key=_descriptor._internal_create_key,
-  serialized_pb=b'\n\x0bstate.proto\"\x0c\n\nStateEmpty\"\x1c\n\x0eStateIdRequest\x12\n\n\x02id\x18\x01 \x02(\t\"1\n\x06\x43ities\x12\n\n\x02id\x18\x01 \x02(\t\x12\r\n\x05state\x18\x02 \x01(\t\x12\x0c\n\x04name\x18\x03 \x01(\t\"K\n\x11StateNotIdRequest\x12\x0f\n\x07\x63ountry\x18\x01 \x02(\t\x12\x0c\n\x04name\x18\x02 \x02(\t\x12\x17\n\x06\x63ities\x18\x03 \x03(\x0b\x32\x07.Cities\"R\n\x0cStateRequest\x12\n\n\x02id\x18\x01 \x02(\t\x12\x0f\n\x07\x63ountry\x18\x02 \x02(\t\x12\x0c\n\x04name\x18\x03 \x02(\t\x12\x17\n\x06\x63ities\x18\x04 \x03(\x0b\x32\x07.Cities\"G\n\x11StateTableRequest\x12\x0c\n\x04page\x18\x01 \x02(\x05\x12\x14\n\x08per_page\x18\x02 \x01(\x05:\x02\x31\x35\x12\x0e\n\x06search\x18\x03 \x01(\t\"0\n\rStateResponse\x12\x1f\n\x08language\x18\x01 \x02(\x0b\x32\r.StateRequest\"8\n\x15StateMultipleResponse\x12\x1f\n\x08language\x18\x01 \x02(\x0b\x32\r.StateRequest\"z\n\x12StateTableResponse\x12\x1c\n\x05items\x18\x01 \x03(\x0b\x32\r.StateRequest\x12\x0c\n\x04page\x18\x02 \x02(\x05\x12\x10\n\x08per_page\x18\x03 \x02(\x05\x12\x13\n\x0btotal_items\x18\x04 \x02(\x05\x12\x11\n\tnum_pages\x18\x05 \x02(\x05\x32\xe6\x01\n\x05State\x12\x30\n\x05table\x12\x12.StateTableRequest\x1a\x13.StateTableResponse\x12.\n\x07get_all\x12\x0b.StateEmpty\x1a\x16.StateMultipleResponse\x12)\n\x03get\x12\x12.StateNotIdRequest\x1a\x0e.StateResponse\x12\'\n\x06update\x12\r.StateRequest\x1a\x0e.StateResponse\x12\'\n\x06\x64\x65lete\x12\r.StateRequest\x1a\x0e.StateResponse'
+  serialized_pb=b'\n\x0bstate.proto\"\x0c\n\nStateEmpty\"\x1c\n\x0eStateIdRequest\x12\n\n\x02id\x18\x01 \x02(\t\"\"\n\x06\x43ities\x12\n\n\x02id\x18\x01 \x02(\t\x12\x0c\n\x04name\x18\x02 \x01(\t\"K\n\x11StateNotIdRequest\x12\x0f\n\x07\x63ountry\x18\x01 \x02(\t\x12\x0c\n\x04name\x18\x02 \x02(\t\x12\x17\n\x06\x63ities\x18\x03 \x03(\x0b\x32\x07.Cities\"R\n\x0cStateRequest\x12\n\n\x02id\x18\x01 \x02(\t\x12\x0f\n\x07\x63ountry\x18\x02 \x02(\t\x12\x0c\n\x04name\x18\x03 \x02(\t\x12\x17\n\x06\x63ities\x18\x04 \x03(\x0b\x32\x07.Cities\"G\n\x11StateTableRequest\x12\x0c\n\x04page\x18\x01 \x02(\x05\x12\x14\n\x08per_page\x18\x02 \x01(\x05:\x02\x31\x35\x12\x0e\n\x06search\x18\x03 \x01(\t\"-\n\rStateResponse\x12\x1c\n\x05state\x18\x01 \x02(\x0b\x32\r.StateRequest\"5\n\x15StateMultipleResponse\x12\x1c\n\x05state\x18\x01 \x03(\x0b\x32\r.StateRequest\"z\n\x12StateTableResponse\x12\x1c\n\x05items\x18\x01 \x03(\x0b\x32\r.StateRequest\x12\x0c\n\x04page\x18\x02 \x02(\x05\x12\x10\n\x08per_page\x18\x03 \x02(\x05\x12\x13\n\x0btotal_items\x18\x04 \x02(\x05\x12\x11\n\tnum_pages\x18\x05 \x02(\x05\x32\x8e\x02\n\x05State\x12\x30\n\x05table\x12\x12.StateTableRequest\x1a\x13.StateTableResponse\x12.\n\x07get_all\x12\x0b.StateEmpty\x1a\x16.StateMultipleResponse\x12&\n\x03get\x12\x0f.StateIdRequest\x1a\x0e.StateResponse\x12*\n\x04save\x12\x12.StateNotIdRequest\x1a\x0e.StateResponse\x12\'\n\x06update\x12\r.StateRequest\x1a\x0e.StateResponse\x12&\n\x06\x64\x65lete\x12\x0f.StateIdRequest\x1a\x0b.StateEmpty'
 )
 
 
@@ -98,15 +98,8 @@ _CITIES = _descriptor.Descriptor(
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
     _descriptor.FieldDescriptor(
-      name='state', full_name='Cities.state', index=1,
+      name='name', full_name='Cities.name', index=1,
       number=2, type=9, cpp_type=9, label=1,
-      has_default_value=False, default_value=b"".decode('utf-8'),
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
-    _descriptor.FieldDescriptor(
-      name='name', full_name='Cities.name', index=2,
-      number=3, type=9, cpp_type=9, label=1,
       has_default_value=False, default_value=b"".decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
@@ -124,7 +117,7 @@ _CITIES = _descriptor.Descriptor(
   oneofs=[
   ],
   serialized_start=59,
-  serialized_end=108,
+  serialized_end=93,
 )
 
 
@@ -169,8 +162,8 @@ _STATENOTIDREQUEST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=110,
-  serialized_end=185,
+  serialized_start=95,
+  serialized_end=170,
 )
 
 
@@ -222,8 +215,8 @@ _STATEREQUEST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=187,
-  serialized_end=269,
+  serialized_start=172,
+  serialized_end=254,
 )
 
 
@@ -268,8 +261,8 @@ _STATETABLEREQUEST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=271,
-  serialized_end=342,
+  serialized_start=256,
+  serialized_end=327,
 )
 
 
@@ -282,7 +275,7 @@ _STATERESPONSE = _descriptor.Descriptor(
   create_key=_descriptor._internal_create_key,
   fields=[
     _descriptor.FieldDescriptor(
-      name='language', full_name='StateResponse.language', index=0,
+      name='state', full_name='StateResponse.state', index=0,
       number=1, type=11, cpp_type=10, label=2,
       has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
@@ -300,8 +293,8 @@ _STATERESPONSE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=344,
-  serialized_end=392,
+  serialized_start=329,
+  serialized_end=374,
 )
 
 
@@ -314,9 +307,9 @@ _STATEMULTIPLERESPONSE = _descriptor.Descriptor(
   create_key=_descriptor._internal_create_key,
   fields=[
     _descriptor.FieldDescriptor(
-      name='language', full_name='StateMultipleResponse.language', index=0,
-      number=1, type=11, cpp_type=10, label=2,
-      has_default_value=False, default_value=None,
+      name='state', full_name='StateMultipleResponse.state', index=0,
+      number=1, type=11, cpp_type=10, label=3,
+      has_default_value=False, default_value=[],
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
@@ -332,8 +325,8 @@ _STATEMULTIPLERESPONSE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=394,
-  serialized_end=450,
+  serialized_start=376,
+  serialized_end=429,
 )
 
 
@@ -392,14 +385,14 @@ _STATETABLERESPONSE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=452,
-  serialized_end=574,
+  serialized_start=431,
+  serialized_end=553,
 )
 
 _STATENOTIDREQUEST.fields_by_name['cities'].message_type = _CITIES
 _STATEREQUEST.fields_by_name['cities'].message_type = _CITIES
-_STATERESPONSE.fields_by_name['language'].message_type = _STATEREQUEST
-_STATEMULTIPLERESPONSE.fields_by_name['language'].message_type = _STATEREQUEST
+_STATERESPONSE.fields_by_name['state'].message_type = _STATEREQUEST
+_STATEMULTIPLERESPONSE.fields_by_name['state'].message_type = _STATEREQUEST
 _STATETABLERESPONSE.fields_by_name['items'].message_type = _STATEREQUEST
 DESCRIPTOR.message_types_by_name['StateEmpty'] = _STATEEMPTY
 DESCRIPTOR.message_types_by_name['StateIdRequest'] = _STATEIDREQUEST
@@ -484,8 +477,8 @@ _STATE = _descriptor.ServiceDescriptor(
   index=0,
   serialized_options=None,
   create_key=_descriptor._internal_create_key,
-  serialized_start=577,
-  serialized_end=807,
+  serialized_start=556,
+  serialized_end=826,
   methods=[
   _descriptor.MethodDescriptor(
     name='table',
@@ -512,6 +505,16 @@ _STATE = _descriptor.ServiceDescriptor(
     full_name='State.get',
     index=2,
     containing_service=None,
+    input_type=_STATEIDREQUEST,
+    output_type=_STATERESPONSE,
+    serialized_options=None,
+    create_key=_descriptor._internal_create_key,
+  ),
+  _descriptor.MethodDescriptor(
+    name='save',
+    full_name='State.save',
+    index=3,
+    containing_service=None,
     input_type=_STATENOTIDREQUEST,
     output_type=_STATERESPONSE,
     serialized_options=None,
@@ -520,7 +523,7 @@ _STATE = _descriptor.ServiceDescriptor(
   _descriptor.MethodDescriptor(
     name='update',
     full_name='State.update',
-    index=3,
+    index=4,
     containing_service=None,
     input_type=_STATEREQUEST,
     output_type=_STATERESPONSE,
@@ -530,10 +533,10 @@ _STATE = _descriptor.ServiceDescriptor(
   _descriptor.MethodDescriptor(
     name='delete',
     full_name='State.delete',
-    index=4,
+    index=5,
     containing_service=None,
-    input_type=_STATEREQUEST,
-    output_type=_STATERESPONSE,
+    input_type=_STATEIDREQUEST,
+    output_type=_STATEEMPTY,
     serialized_options=None,
     create_key=_descriptor._internal_create_key,
   ),

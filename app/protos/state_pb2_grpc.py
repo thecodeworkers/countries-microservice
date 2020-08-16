@@ -26,6 +26,11 @@ class StateStub(object):
                 )
         self.get = channel.unary_unary(
                 '/State/get',
+                request_serializer=state__pb2.StateIdRequest.SerializeToString,
+                response_deserializer=state__pb2.StateResponse.FromString,
+                )
+        self.save = channel.unary_unary(
+                '/State/save',
                 request_serializer=state__pb2.StateNotIdRequest.SerializeToString,
                 response_deserializer=state__pb2.StateResponse.FromString,
                 )
@@ -36,8 +41,8 @@ class StateStub(object):
                 )
         self.delete = channel.unary_unary(
                 '/State/delete',
-                request_serializer=state__pb2.StateRequest.SerializeToString,
-                response_deserializer=state__pb2.StateResponse.FromString,
+                request_serializer=state__pb2.StateIdRequest.SerializeToString,
+                response_deserializer=state__pb2.StateEmpty.FromString,
                 )
 
 
@@ -57,6 +62,12 @@ class StateServicer(object):
         raise NotImplementedError('Method not implemented!')
 
     def get(self, request, context):
+        """Missing associated documentation comment in .proto file."""
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def save(self, request, context):
         """Missing associated documentation comment in .proto file."""
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
@@ -89,6 +100,11 @@ def add_StateServicer_to_server(servicer, server):
             ),
             'get': grpc.unary_unary_rpc_method_handler(
                     servicer.get,
+                    request_deserializer=state__pb2.StateIdRequest.FromString,
+                    response_serializer=state__pb2.StateResponse.SerializeToString,
+            ),
+            'save': grpc.unary_unary_rpc_method_handler(
+                    servicer.save,
                     request_deserializer=state__pb2.StateNotIdRequest.FromString,
                     response_serializer=state__pb2.StateResponse.SerializeToString,
             ),
@@ -99,8 +115,8 @@ def add_StateServicer_to_server(servicer, server):
             ),
             'delete': grpc.unary_unary_rpc_method_handler(
                     servicer.delete,
-                    request_deserializer=state__pb2.StateRequest.FromString,
-                    response_serializer=state__pb2.StateResponse.SerializeToString,
+                    request_deserializer=state__pb2.StateIdRequest.FromString,
+                    response_serializer=state__pb2.StateEmpty.SerializeToString,
             ),
     }
     generic_handler = grpc.method_handlers_generic_handler(
@@ -155,6 +171,22 @@ class State(object):
             timeout=None,
             metadata=None):
         return grpc.experimental.unary_unary(request, target, '/State/get',
+            state__pb2.StateIdRequest.SerializeToString,
+            state__pb2.StateResponse.FromString,
+            options, channel_credentials,
+            call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def save(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/State/save',
             state__pb2.StateNotIdRequest.SerializeToString,
             state__pb2.StateResponse.FromString,
             options, channel_credentials,
@@ -187,7 +219,7 @@ class State(object):
             timeout=None,
             metadata=None):
         return grpc.experimental.unary_unary(request, target, '/State/delete',
-            state__pb2.StateRequest.SerializeToString,
-            state__pb2.StateResponse.FromString,
+            state__pb2.StateIdRequest.SerializeToString,
+            state__pb2.StateEmpty.FromString,
             options, channel_credentials,
             call_credentials, compression, wait_for_ready, timeout, metadata)

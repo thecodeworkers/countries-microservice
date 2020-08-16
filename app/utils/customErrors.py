@@ -1,2 +1,0 @@
-class BadValue(Exception):
-    pass

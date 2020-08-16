@@ -8,8 +8,7 @@ message StateIdRequest {
 
 message Cities {
   required string id = 1;
-  optional string state = 2;
-  optional string name = 3;
+  optional string name = 2;
 }
 
 message StateNotIdRequest {
@@ -34,11 +33,11 @@ message StateTableRequest {
 }
 
 message StateResponse {
-  required StateRequest language = 1;
+  required StateRequest state = 1;
 }
 
 message StateMultipleResponse {
-  required StateRequest language = 1;
+  repeated StateRequest state = 1;
 }
 
 message StateTableResponse {
@@ -52,7 +51,8 @@ message StateTableResponse {
 service State {
   rpc table (StateTableRequest) returns (StateTableResponse);
   rpc get_all (StateEmpty) returns (StateMultipleResponse);
-  rpc get (StateNotIdRequest) returns (StateResponse);
+  rpc get (StateIdRequest) returns (StateResponse);
+  rpc save (StateNotIdRequest) returns (StateResponse);
   rpc update (StateRequest) returns (StateResponse);
-  rpc delete (StateRequest) returns (StateResponse);
+  rpc delete (StateIdRequest) returns (StateEmpty);
 }
