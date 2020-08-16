@@ -11,10 +11,12 @@ class CountryService(CountryServicer):
 		
 		countries = map(self.__iterate, countries)
 		countries = list(countries)
-		print(countries)
+
+		return countries
 
 	def __iterate(self, object):
 		states = self.__nextLevel(States, object, 'states')
+        
 		object['states'] = states
 
 		return object
@@ -23,7 +25,13 @@ class CountryService(CountryServicer):
 		states = list()
 		for i in instance[key]:
 			coincidence = model.objects.get(id=i['$oid'])
-			states.append({'name': coincidence.name})
+
+			cities = list()
+
+			for j in coincidence.cities:
+				cities.append({'name': j.name})
+
+			states.append({'name': coincidence.name, 'cities': cities})
 
 		return states
 
