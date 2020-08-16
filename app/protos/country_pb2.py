@@ -19,7 +19,7 @@ DESCRIPTOR = _descriptor.FileDescriptor(
   syntax='proto2',
   serialized_options=None,
   create_key=_descriptor._internal_create_key,
-  serialized_pb=b'\n\rcountry.proto\"\x0e\n\x0c\x43ountryEmpty\";\n\x17\x43ountryMultipleResponse\x12 \n\x07\x63ountry\x18\x01 \x03(\x0b\x32\x0f.CountryRequest\"f\n\x0e\x43ountryRequest\x12\n\n\x02id\x18\x01 \x02(\t\x12\x0c\n\x04name\x18\x02 \x02(\t\x12\x14\n\x0cphone_prefix\x18\x03 \x02(\t\x12\x14\n\x06\x61\x63tive\x18\x04 \x01(\x08:\x04true\x12\x0e\n\x06states\x18\x05 \x03(\t2=\n\x07\x43ountry\x12\x32\n\x07get_all\x12\r.CountryEmpty\x1a\x18.CountryMultipleResponse'
+  serialized_pb=b'\n\rcountry.proto\"\x0e\n\x0c\x43ountryEmpty\"\x14\n\x06States\x12\n\n\x02id\x18\x01 \x01(\t\"o\n\x0e\x43ountryRequest\x12\n\n\x02id\x18\x01 \x02(\t\x12\x0c\n\x04name\x18\x02 \x02(\t\x12\x14\n\x0cphone_prefix\x18\x03 \x02(\t\x12\x14\n\x06\x61\x63tive\x18\x04 \x01(\x08:\x04true\x12\x17\n\x06states\x18\x05 \x03(\x0b\x32\x07.States\";\n\x17\x43ountryMultipleResponse\x12 \n\x07\x63ountry\x18\x01 \x03(\x0b\x32\x0f.CountryRequest2=\n\x07\x43ountry\x12\x32\n\x07get_all\x12\r.CountryEmpty\x1a\x18.CountryMultipleResponse'
 )
 
 
@@ -50,18 +50,18 @@ _COUNTRYEMPTY = _descriptor.Descriptor(
 )
 
 
-_COUNTRYMULTIPLERESPONSE = _descriptor.Descriptor(
-  name='CountryMultipleResponse',
-  full_name='CountryMultipleResponse',
+_STATES = _descriptor.Descriptor(
+  name='States',
+  full_name='States',
   filename=None,
   file=DESCRIPTOR,
   containing_type=None,
   create_key=_descriptor._internal_create_key,
   fields=[
     _descriptor.FieldDescriptor(
-      name='country', full_name='CountryMultipleResponse.country', index=0,
-      number=1, type=11, cpp_type=10, label=3,
-      has_default_value=False, default_value=[],
+      name='id', full_name='States.id', index=0,
+      number=1, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=b"".decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
@@ -78,7 +78,7 @@ _COUNTRYMULTIPLERESPONSE = _descriptor.Descriptor(
   oneofs=[
   ],
   serialized_start=33,
-  serialized_end=92,
+  serialized_end=53,
 )
 
 
@@ -120,7 +120,7 @@ _COUNTRYREQUEST = _descriptor.Descriptor(
       serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
     _descriptor.FieldDescriptor(
       name='states', full_name='CountryRequest.states', index=4,
-      number=5, type=9, cpp_type=9, label=3,
+      number=5, type=11, cpp_type=10, label=3,
       has_default_value=False, default_value=[],
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
@@ -137,14 +137,48 @@ _COUNTRYREQUEST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=94,
-  serialized_end=196,
+  serialized_start=55,
+  serialized_end=166,
 )
 
+
+_COUNTRYMULTIPLERESPONSE = _descriptor.Descriptor(
+  name='CountryMultipleResponse',
+  full_name='CountryMultipleResponse',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  create_key=_descriptor._internal_create_key,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='country', full_name='CountryMultipleResponse.country', index=0,
+      number=1, type=11, cpp_type=10, label=3,
+      has_default_value=False, default_value=[],
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  serialized_options=None,
+  is_extendable=False,
+  syntax='proto2',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=168,
+  serialized_end=227,
+)
+
+_COUNTRYREQUEST.fields_by_name['states'].message_type = _STATES
 _COUNTRYMULTIPLERESPONSE.fields_by_name['country'].message_type = _COUNTRYREQUEST
 DESCRIPTOR.message_types_by_name['CountryEmpty'] = _COUNTRYEMPTY
-DESCRIPTOR.message_types_by_name['CountryMultipleResponse'] = _COUNTRYMULTIPLERESPONSE
+DESCRIPTOR.message_types_by_name['States'] = _STATES
 DESCRIPTOR.message_types_by_name['CountryRequest'] = _COUNTRYREQUEST
+DESCRIPTOR.message_types_by_name['CountryMultipleResponse'] = _COUNTRYMULTIPLERESPONSE
 _sym_db.RegisterFileDescriptor(DESCRIPTOR)
 
 CountryEmpty = _reflection.GeneratedProtocolMessageType('CountryEmpty', (_message.Message,), {
@@ -154,12 +188,12 @@ CountryEmpty = _reflection.GeneratedProtocolMessageType('CountryEmpty', (_messag
   })
 _sym_db.RegisterMessage(CountryEmpty)
 
-CountryMultipleResponse = _reflection.GeneratedProtocolMessageType('CountryMultipleResponse', (_message.Message,), {
-  'DESCRIPTOR' : _COUNTRYMULTIPLERESPONSE,
+States = _reflection.GeneratedProtocolMessageType('States', (_message.Message,), {
+  'DESCRIPTOR' : _STATES,
   '__module__' : 'country_pb2'
-  # @@protoc_insertion_point(class_scope:CountryMultipleResponse)
+  # @@protoc_insertion_point(class_scope:States)
   })
-_sym_db.RegisterMessage(CountryMultipleResponse)
+_sym_db.RegisterMessage(States)
 
 CountryRequest = _reflection.GeneratedProtocolMessageType('CountryRequest', (_message.Message,), {
   'DESCRIPTOR' : _COUNTRYREQUEST,
@@ -167,6 +201,13 @@ CountryRequest = _reflection.GeneratedProtocolMessageType('CountryRequest', (_me
   # @@protoc_insertion_point(class_scope:CountryRequest)
   })
 _sym_db.RegisterMessage(CountryRequest)
+
+CountryMultipleResponse = _reflection.GeneratedProtocolMessageType('CountryMultipleResponse', (_message.Message,), {
+  'DESCRIPTOR' : _COUNTRYMULTIPLERESPONSE,
+  '__module__' : 'country_pb2'
+  # @@protoc_insertion_point(class_scope:CountryMultipleResponse)
+  })
+_sym_db.RegisterMessage(CountryMultipleResponse)
 
 
 
@@ -177,8 +218,8 @@ _COUNTRY = _descriptor.ServiceDescriptor(
   index=0,
   serialized_options=None,
   create_key=_descriptor._internal_create_key,
-  serialized_start=198,
-  serialized_end=259,
+  serialized_start=229,
+  serialized_end=290,
   methods=[
   _descriptor.MethodDescriptor(
     name='get_all',

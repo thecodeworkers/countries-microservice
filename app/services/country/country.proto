@@ -2,8 +2,8 @@ syntax = "proto2";
 
 message CountryEmpty {}
 
-message CountryMultipleResponse {
-	repeated CountryRequest country = 1;
+message States {
+	required string id = 1;
 }
 
 message CountryRequest {
@@ -11,7 +11,11 @@ message CountryRequest {
 	required string name = 2;
 	required string phone_prefix = 3;
 	optional bool active = 4 [default = true];
-	repeated string states = 5;
+	repeated States states = 5;
+}
+
+message CountryMultipleResponse {
+	repeated CountryRequest country = 1;
 }
 
 service Country {
