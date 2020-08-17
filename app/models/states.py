@@ -12,7 +12,7 @@ class States(Document):
     meta = {'queryset_class': RefQuerySet}
 
     def to_json(self):
-        data = RefQuerySet.set_related(self, self.select_related())
+        data = RefQuerySet.set_related(RefQuerySet, self.select_related())
 
         for key in data:
             if isinstance(data[key], list):
