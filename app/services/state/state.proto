@@ -8,7 +8,8 @@ message StateIdRequest {
 
 message Cities {
   required string id = 1;
-  optional string name = 2;
+  optional string state = 2;
+  optional string name = 3;
 }
 
 message StateNotIdRequest {
