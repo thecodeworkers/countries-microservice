@@ -27,6 +27,11 @@ class RefQuerySet(QuerySet):
             for key in data:
                 if isinstance(data[key], list):
                     data[key] = self.set_related(data[key])
+                    for list_data in data[key]:
+                        for key2 in list_data:
+                            if isinstance(list_data[key2], list):
+                                list_data[key2] = self.set_related(list_data[key2])
+
 
         return datas
 
