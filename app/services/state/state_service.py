@@ -8,18 +8,18 @@ from ...models import States, Countries
 
 class StateService(state_pb2_grpc.StateServicer):
     def table(self, request, context):
-        states = States.objects
+        try:
+            
+            states = States.objects
 
-        response = paginate(states, request.page, request.per_page)
-    
-        response = state_pb2.StateTableResponse(**response)
-    
-        return response
-        #try:
-        #    
-        #except Exception as error:
-        #    raise Exception(error)
-        
+            response = paginate(states, request.page, request.per_page)
+
+            response = state_pb2.StateTableResponse(**response)
+
+            return response
+
+        except Exception as error:
+            raise Exception(error)
 
     def get_all(self, request, context):
         states = parser_all_object(States.objects.all())
@@ -45,7 +45,7 @@ class StateService(state_pb2_grpc.StateServicer):
             country = Countries.objects.get(id=state_object['country'])
 
             del state_object['country']
-            
+
             state = States(**state_object)
             state.country = country
             state.save()
@@ -68,7 +68,7 @@ class StateService(state_pb2_grpc.StateServicer):
 
             country = Countries.objects.get(id=state_object['country'])
             state_object['country'] = country
-            
+
             if state:
                 del state_object['id']
 

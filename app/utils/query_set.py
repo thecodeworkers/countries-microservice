@@ -1,5 +1,4 @@
 from mongoengine import QuerySet, Document
-from bson.objectid import ObjectId
 from bson.dbref import DBRef
 from bson.json_util import dumps
 
