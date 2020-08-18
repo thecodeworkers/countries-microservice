@@ -69,12 +69,18 @@ class StateService(state_pb2_grpc.StateServicer):
             country = Countries.objects.get(id=state_object['country'])
             state_object['country'] = country
 
+            old_country = Countries.objects.get(id=state.country.id)
+            
+
             if state:
                 del state_object['id']
 
             state.update(**state_object)
 
             state = States.objects.get(id=state.id)
+
+            old_country.update(pull__states=state)
+            country.update(push__states=state)
 
             state = parser_one_object(state)
             response = state_pb2.StateResponse(state=state)
@@ -87,6 +93,10 @@ class StateService(state_pb2_grpc.StateServicer):
     def delete(self, request, context):
         try:
             state = States.objects.get(id=request.id)
+
+            country = Countries.objects.get(id=state.country.id)
+            country.update(pull__states=state)
+
             state = state.delete()
             response = state_pb2.StateEmpty()
 
