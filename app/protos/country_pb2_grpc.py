@@ -14,6 +14,11 @@ class CountryStub(object):
         Args:
             channel: A grpc.Channel.
         """
+        self.table = channel.unary_unary(
+                '/Country/table',
+                request_serializer=country__pb2.CountryTableRequest.SerializeToString,
+                response_deserializer=country__pb2.CountryTableResponse.FromString,
+                )
         self.get_all = channel.unary_unary(
                 '/Country/get_all',
                 request_serializer=country__pb2.CountryEmpty.SerializeToString,
@@ -24,6 +29,12 @@ class CountryStub(object):
 class CountryServicer(object):
     """Missing associated documentation comment in .proto file."""
 
+    def table(self, request, context):
+        """Missing associated documentation comment in .proto file."""
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
     def get_all(self, request, context):
         """Missing associated documentation comment in .proto file."""
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
@@ -33,6 +44,11 @@ class CountryServicer(object):
 
 def add_CountryServicer_to_server(servicer, server):
     rpc_method_handlers = {
+            'table': grpc.unary_unary_rpc_method_handler(
+                    servicer.table,
+                    request_deserializer=country__pb2.CountryTableRequest.FromString,
+                    response_serializer=country__pb2.CountryTableResponse.SerializeToString,
+            ),
             'get_all': grpc.unary_unary_rpc_method_handler(
                     servicer.get_all,
                     request_deserializer=country__pb2.CountryEmpty.FromString,
@@ -47,6 +63,22 @@ def add_CountryServicer_to_server(servicer, server):
  # This class is part of an EXPERIMENTAL API.
 class Country(object):
     """Missing associated documentation comment in .proto file."""
+
+    @staticmethod
+    def table(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/Country/table',
+            country__pb2.CountryTableRequest.SerializeToString,
+            country__pb2.CountryTableResponse.FromString,
+            options, channel_credentials,
+            call_credentials, compression, wait_for_ready, timeout, metadata)
 
     @staticmethod
     def get_all(request,

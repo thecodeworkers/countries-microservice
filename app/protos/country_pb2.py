@@ -19,7 +19,7 @@ DESCRIPTOR = _descriptor.FileDescriptor(
   syntax='proto2',
   serialized_options=None,
   create_key=_descriptor._internal_create_key,
-  serialized_pb=b'\n\rcountry.proto\"\x0e\n\x0c\x43ountryEmpty\"\x14\n\x06States\x12\n\n\x02id\x18\x01 \x01(\t\"o\n\x0e\x43ountryRequest\x12\n\n\x02id\x18\x01 \x02(\t\x12\x0c\n\x04name\x18\x02 \x02(\t\x12\x14\n\x0cphone_prefix\x18\x03 \x02(\t\x12\x14\n\x06\x61\x63tive\x18\x04 \x01(\x08:\x04true\x12\x17\n\x06states\x18\x05 \x03(\x0b\x32\x07.States\";\n\x17\x43ountryMultipleResponse\x12 \n\x07\x63ountry\x18\x01 \x03(\x0b\x32\x0f.CountryRequest2=\n\x07\x43ountry\x12\x32\n\x07get_all\x12\r.CountryEmpty\x1a\x18.CountryMultipleResponse'
+  serialized_pb=b'\n\rcountry.proto\"\x0e\n\x0c\x43ountryEmpty\"1\n\x06\x43ities\x12\n\n\x02id\x18\x01 \x02(\t\x12\r\n\x05state\x18\x02 \x01(\t\x12\x0c\n\x04name\x18\x03 \x01(\t\"L\n\x06States\x12\n\n\x02id\x18\x01 \x02(\t\x12\x0f\n\x07\x63ountry\x18\x02 \x01(\t\x12\x0c\n\x04name\x18\x03 \x02(\t\x12\x17\n\x06\x63ities\x18\x04 \x03(\x0b\x32\x07.Cities\"o\n\x0e\x43ountryRequest\x12\n\n\x02id\x18\x01 \x02(\t\x12\x0c\n\x04name\x18\x02 \x02(\t\x12\x14\n\x0cphone_prefix\x18\x03 \x02(\t\x12\x14\n\x06\x61\x63tive\x18\x04 \x01(\x08:\x04true\x12\x17\n\x06states\x18\x05 \x03(\x0b\x32\x07.States\"I\n\x13\x43ountryTableRequest\x12\x0c\n\x04page\x18\x01 \x02(\x05\x12\x14\n\x08per_page\x18\x02 \x01(\x05:\x02\x31\x35\x12\x0e\n\x06search\x18\x03 \x01(\t\";\n\x17\x43ountryMultipleResponse\x12 \n\x07\x63ountry\x18\x01 \x03(\x0b\x32\x0f.CountryRequest\"~\n\x14\x43ountryTableResponse\x12\x1e\n\x05items\x18\x01 \x03(\x0b\x32\x0f.CountryRequest\x12\x0c\n\x04page\x18\x02 \x02(\x05\x12\x10\n\x08per_page\x18\x03 \x02(\x05\x12\x13\n\x0btotal_items\x18\x04 \x02(\x05\x12\x11\n\tnum_pages\x18\x05 \x02(\x05\x32s\n\x07\x43ountry\x12\x34\n\x05table\x12\x14.CountryTableRequest\x1a\x15.CountryTableResponse\x12\x32\n\x07get_all\x12\r.CountryEmpty\x1a\x18.CountryMultipleResponse'
 )
 
 
@@ -50,17 +50,31 @@ _COUNTRYEMPTY = _descriptor.Descriptor(
 )
 
 
-_STATES = _descriptor.Descriptor(
-  name='States',
-  full_name='States',
+_CITIES = _descriptor.Descriptor(
+  name='Cities',
+  full_name='Cities',
   filename=None,
   file=DESCRIPTOR,
   containing_type=None,
   create_key=_descriptor._internal_create_key,
   fields=[
     _descriptor.FieldDescriptor(
-      name='id', full_name='States.id', index=0,
-      number=1, type=9, cpp_type=9, label=1,
+      name='id', full_name='Cities.id', index=0,
+      number=1, type=9, cpp_type=9, label=2,
+      has_default_value=False, default_value=b"".decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+    _descriptor.FieldDescriptor(
+      name='state', full_name='Cities.state', index=1,
+      number=2, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=b"".decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+    _descriptor.FieldDescriptor(
+      name='name', full_name='Cities.name', index=2,
+      number=3, type=9, cpp_type=9, label=1,
       has_default_value=False, default_value=b"".decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
@@ -78,7 +92,60 @@ _STATES = _descriptor.Descriptor(
   oneofs=[
   ],
   serialized_start=33,
-  serialized_end=53,
+  serialized_end=82,
+)
+
+
+_STATES = _descriptor.Descriptor(
+  name='States',
+  full_name='States',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  create_key=_descriptor._internal_create_key,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='id', full_name='States.id', index=0,
+      number=1, type=9, cpp_type=9, label=2,
+      has_default_value=False, default_value=b"".decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+    _descriptor.FieldDescriptor(
+      name='country', full_name='States.country', index=1,
+      number=2, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=b"".decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+    _descriptor.FieldDescriptor(
+      name='name', full_name='States.name', index=2,
+      number=3, type=9, cpp_type=9, label=2,
+      has_default_value=False, default_value=b"".decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+    _descriptor.FieldDescriptor(
+      name='cities', full_name='States.cities', index=3,
+      number=4, type=11, cpp_type=10, label=3,
+      has_default_value=False, default_value=[],
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  serialized_options=None,
+  is_extendable=False,
+  syntax='proto2',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=84,
+  serialized_end=160,
 )
 
 
@@ -137,8 +204,54 @@ _COUNTRYREQUEST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=55,
-  serialized_end=166,
+  serialized_start=162,
+  serialized_end=273,
+)
+
+
+_COUNTRYTABLEREQUEST = _descriptor.Descriptor(
+  name='CountryTableRequest',
+  full_name='CountryTableRequest',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  create_key=_descriptor._internal_create_key,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='page', full_name='CountryTableRequest.page', index=0,
+      number=1, type=5, cpp_type=1, label=2,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+    _descriptor.FieldDescriptor(
+      name='per_page', full_name='CountryTableRequest.per_page', index=1,
+      number=2, type=5, cpp_type=1, label=1,
+      has_default_value=True, default_value=15,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+    _descriptor.FieldDescriptor(
+      name='search', full_name='CountryTableRequest.search', index=2,
+      number=3, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=b"".decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  serialized_options=None,
+  is_extendable=False,
+  syntax='proto2',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=275,
+  serialized_end=348,
 )
 
 
@@ -169,16 +282,81 @@ _COUNTRYMULTIPLERESPONSE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=168,
-  serialized_end=227,
+  serialized_start=350,
+  serialized_end=409,
 )
 
+
+_COUNTRYTABLERESPONSE = _descriptor.Descriptor(
+  name='CountryTableResponse',
+  full_name='CountryTableResponse',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  create_key=_descriptor._internal_create_key,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='items', full_name='CountryTableResponse.items', index=0,
+      number=1, type=11, cpp_type=10, label=3,
+      has_default_value=False, default_value=[],
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+    _descriptor.FieldDescriptor(
+      name='page', full_name='CountryTableResponse.page', index=1,
+      number=2, type=5, cpp_type=1, label=2,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+    _descriptor.FieldDescriptor(
+      name='per_page', full_name='CountryTableResponse.per_page', index=2,
+      number=3, type=5, cpp_type=1, label=2,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+    _descriptor.FieldDescriptor(
+      name='total_items', full_name='CountryTableResponse.total_items', index=3,
+      number=4, type=5, cpp_type=1, label=2,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+    _descriptor.FieldDescriptor(
+      name='num_pages', full_name='CountryTableResponse.num_pages', index=4,
+      number=5, type=5, cpp_type=1, label=2,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  serialized_options=None,
+  is_extendable=False,
+  syntax='proto2',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=411,
+  serialized_end=537,
+)
+
+_STATES.fields_by_name['cities'].message_type = _CITIES
 _COUNTRYREQUEST.fields_by_name['states'].message_type = _STATES
 _COUNTRYMULTIPLERESPONSE.fields_by_name['country'].message_type = _COUNTRYREQUEST
+_COUNTRYTABLERESPONSE.fields_by_name['items'].message_type = _COUNTRYREQUEST
 DESCRIPTOR.message_types_by_name['CountryEmpty'] = _COUNTRYEMPTY
+DESCRIPTOR.message_types_by_name['Cities'] = _CITIES
 DESCRIPTOR.message_types_by_name['States'] = _STATES
 DESCRIPTOR.message_types_by_name['CountryRequest'] = _COUNTRYREQUEST
+DESCRIPTOR.message_types_by_name['CountryTableRequest'] = _COUNTRYTABLEREQUEST
 DESCRIPTOR.message_types_by_name['CountryMultipleResponse'] = _COUNTRYMULTIPLERESPONSE
+DESCRIPTOR.message_types_by_name['CountryTableResponse'] = _COUNTRYTABLERESPONSE
 _sym_db.RegisterFileDescriptor(DESCRIPTOR)
 
 CountryEmpty = _reflection.GeneratedProtocolMessageType('CountryEmpty', (_message.Message,), {
@@ -187,6 +365,13 @@ CountryEmpty = _reflection.GeneratedProtocolMessageType('CountryEmpty', (_messag
   # @@protoc_insertion_point(class_scope:CountryEmpty)
   })
 _sym_db.RegisterMessage(CountryEmpty)
+
+Cities = _reflection.GeneratedProtocolMessageType('Cities', (_message.Message,), {
+  'DESCRIPTOR' : _CITIES,
+  '__module__' : 'country_pb2'
+  # @@protoc_insertion_point(class_scope:Cities)
+  })
+_sym_db.RegisterMessage(Cities)
 
 States = _reflection.GeneratedProtocolMessageType('States', (_message.Message,), {
   'DESCRIPTOR' : _STATES,
@@ -202,12 +387,26 @@ CountryRequest = _reflection.GeneratedProtocolMessageType('CountryRequest', (_me
   })
 _sym_db.RegisterMessage(CountryRequest)
 
+CountryTableRequest = _reflection.GeneratedProtocolMessageType('CountryTableRequest', (_message.Message,), {
+  'DESCRIPTOR' : _COUNTRYTABLEREQUEST,
+  '__module__' : 'country_pb2'
+  # @@protoc_insertion_point(class_scope:CountryTableRequest)
+  })
+_sym_db.RegisterMessage(CountryTableRequest)
+
 CountryMultipleResponse = _reflection.GeneratedProtocolMessageType('CountryMultipleResponse', (_message.Message,), {
   'DESCRIPTOR' : _COUNTRYMULTIPLERESPONSE,
   '__module__' : 'country_pb2'
   # @@protoc_insertion_point(class_scope:CountryMultipleResponse)
   })
 _sym_db.RegisterMessage(CountryMultipleResponse)
+
+CountryTableResponse = _reflection.GeneratedProtocolMessageType('CountryTableResponse', (_message.Message,), {
+  'DESCRIPTOR' : _COUNTRYTABLERESPONSE,
+  '__module__' : 'country_pb2'
+  # @@protoc_insertion_point(class_scope:CountryTableResponse)
+  })
+_sym_db.RegisterMessage(CountryTableResponse)
 
 
 
@@ -218,13 +417,23 @@ _COUNTRY = _descriptor.ServiceDescriptor(
   index=0,
   serialized_options=None,
   create_key=_descriptor._internal_create_key,
-  serialized_start=229,
-  serialized_end=290,
+  serialized_start=539,
+  serialized_end=654,
   methods=[
+  _descriptor.MethodDescriptor(
+    name='table',
+    full_name='Country.table',
+    index=0,
+    containing_service=None,
+    input_type=_COUNTRYTABLEREQUEST,
+    output_type=_COUNTRYTABLERESPONSE,
+    serialized_options=None,
+    create_key=_descriptor._internal_create_key,
+  ),
   _descriptor.MethodDescriptor(
     name='get_all',
     full_name='Country.get_all',
-    index=0,
+    index=1,
     containing_service=None,
     input_type=_COUNTRYEMPTY,
     output_type=_COUNTRYMULTIPLERESPONSE,

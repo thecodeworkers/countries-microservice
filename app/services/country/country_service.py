@@ -1,4 +1,4 @@
-from ...protos import CountryServicer, CountryMultipleResponse, add_CountryServicer_to_server
+from ...protos import CountryServicer, CountryMultipleResponse, add_CountryServicer_to_server, country_pb2, country_pb2_grpc
 from ...utils import parser_all_object
 from ...models import Countries, States, Cities
 from ..bootstrap import grpc_server
@@ -8,11 +8,14 @@ class CountryService(CountryServicer):
 
 		countries = Countries.objects.all()
 		countries = parser_all_object(countries)
+		# print(countries)
 		
 		countries = map(self.__iterate, countries)
 		countries = list(countries)
+		# print(countries)
+		response = country_pb2.CountryMultipleResponse(country=countries)
 
-		return countries
+		return response
 
 	def __iterate(self, object):
 		states = self.__nextLevel(States, object, 'states')
@@ -26,12 +29,14 @@ class CountryService(CountryServicer):
 		for i in instance[key]:
 			coincidence = model.objects.get(id=i['$oid'])
 
+			# print(coincidence.id)
+
 			cities = list()
 
 			for j in coincidence.cities:
-				cities.append({'name': j.name})
+				cities.append({'id': j.id, 'name': j.name})
 
-			states.append({'name': coincidence.name, 'cities': cities})
+			states.append({'id': coincidence.id, 'name': coincidence.name, 'cities': cities})
 
 		return states
 
