@@ -2,7 +2,7 @@ syntax = "proto2";
 
 message CountryEmpty {}
 
-message Cities {
+message CitiesC {
 	required string id = 1;
 	optional string state = 2;
 	optional string name = 3;
@@ -12,7 +12,7 @@ message States {
 	required string id = 1;
 	optional string country = 2;
 	required string name = 3;
-	repeated Cities cities = 4;
+	repeated CitiesC cities = 4;
 }
 
 message CountryRequest {

@@ -6,6 +6,8 @@ from bson.json_util import dumps
 class RefQuerySet(QuerySet):
 
     def set_related(self, data):
+        print(data)
+        print(data._data)
         new_data = data._data
         new_data['id'] = str(new_data['id'])
 

@@ -19,7 +19,7 @@ DESCRIPTOR = _descriptor.FileDescriptor(
   syntax='proto2',
   serialized_options=None,
   create_key=_descriptor._internal_create_key,
-  serialized_pb=b'\n\rcountry.proto\"\x0e\n\x0c\x43ountryEmpty\"1\n\x06\x43ities\x12\n\n\x02id\x18\x01 \x02(\t\x12\r\n\x05state\x18\x02 \x01(\t\x12\x0c\n\x04name\x18\x03 \x01(\t\"L\n\x06States\x12\n\n\x02id\x18\x01 \x02(\t\x12\x0f\n\x07\x63ountry\x18\x02 \x01(\t\x12\x0c\n\x04name\x18\x03 \x02(\t\x12\x17\n\x06\x63ities\x18\x04 \x03(\x0b\x32\x07.Cities\"o\n\x0e\x43ountryRequest\x12\n\n\x02id\x18\x01 \x02(\t\x12\x0c\n\x04name\x18\x02 \x02(\t\x12\x14\n\x0cphone_prefix\x18\x03 \x02(\t\x12\x14\n\x06\x61\x63tive\x18\x04 \x01(\x08:\x04true\x12\x17\n\x06states\x18\x05 \x03(\x0b\x32\x07.States\"I\n\x13\x43ountryTableRequest\x12\x0c\n\x04page\x18\x01 \x02(\x05\x12\x14\n\x08per_page\x18\x02 \x01(\x05:\x02\x31\x35\x12\x0e\n\x06search\x18\x03 \x01(\t\";\n\x17\x43ountryMultipleResponse\x12 \n\x07\x63ountry\x18\x01 \x03(\x0b\x32\x0f.CountryRequest\"~\n\x14\x43ountryTableResponse\x12\x1e\n\x05items\x18\x01 \x03(\x0b\x32\x0f.CountryRequest\x12\x0c\n\x04page\x18\x02 \x02(\x05\x12\x10\n\x08per_page\x18\x03 \x02(\x05\x12\x13\n\x0btotal_items\x18\x04 \x02(\x05\x12\x11\n\tnum_pages\x18\x05 \x02(\x05\x32s\n\x07\x43ountry\x12\x34\n\x05table\x12\x14.CountryTableRequest\x1a\x15.CountryTableResponse\x12\x32\n\x07get_all\x12\r.CountryEmpty\x1a\x18.CountryMultipleResponse'
+  serialized_pb=b'\n\rcountry.proto\"\x0e\n\x0c\x43ountryEmpty\"2\n\x07\x43itiesC\x12\n\n\x02id\x18\x01 \x02(\t\x12\r\n\x05state\x18\x02 \x01(\t\x12\x0c\n\x04name\x18\x03 \x01(\t\"M\n\x06States\x12\n\n\x02id\x18\x01 \x02(\t\x12\x0f\n\x07\x63ountry\x18\x02 \x01(\t\x12\x0c\n\x04name\x18\x03 \x02(\t\x12\x18\n\x06\x63ities\x18\x04 \x03(\x0b\x32\x08.CitiesC\"o\n\x0e\x43ountryRequest\x12\n\n\x02id\x18\x01 \x02(\t\x12\x0c\n\x04name\x18\x02 \x02(\t\x12\x14\n\x0cphone_prefix\x18\x03 \x02(\t\x12\x14\n\x06\x61\x63tive\x18\x04 \x01(\x08:\x04true\x12\x17\n\x06states\x18\x05 \x03(\x0b\x32\x07.States\"I\n\x13\x43ountryTableRequest\x12\x0c\n\x04page\x18\x01 \x02(\x05\x12\x14\n\x08per_page\x18\x02 \x01(\x05:\x02\x31\x35\x12\x0e\n\x06search\x18\x03 \x01(\t\";\n\x17\x43ountryMultipleResponse\x12 \n\x07\x63ountry\x18\x01 \x03(\x0b\x32\x0f.CountryRequest\"~\n\x14\x43ountryTableResponse\x12\x1e\n\x05items\x18\x01 \x03(\x0b\x32\x0f.CountryRequest\x12\x0c\n\x04page\x18\x02 \x02(\x05\x12\x10\n\x08per_page\x18\x03 \x02(\x05\x12\x13\n\x0btotal_items\x18\x04 \x02(\x05\x12\x11\n\tnum_pages\x18\x05 \x02(\x05\x32s\n\x07\x43ountry\x12\x34\n\x05table\x12\x14.CountryTableRequest\x1a\x15.CountryTableResponse\x12\x32\n\x07get_all\x12\r.CountryEmpty\x1a\x18.CountryMultipleResponse'
 )
 
 
@@ -50,30 +50,30 @@ _COUNTRYEMPTY = _descriptor.Descriptor(
 )
 
 
-_CITIES = _descriptor.Descriptor(
-  name='Cities',
-  full_name='Cities',
+_CITIESC = _descriptor.Descriptor(
+  name='CitiesC',
+  full_name='CitiesC',
   filename=None,
   file=DESCRIPTOR,
   containing_type=None,
   create_key=_descriptor._internal_create_key,
   fields=[
     _descriptor.FieldDescriptor(
-      name='id', full_name='Cities.id', index=0,
+      name='id', full_name='CitiesC.id', index=0,
       number=1, type=9, cpp_type=9, label=2,
       has_default_value=False, default_value=b"".decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
     _descriptor.FieldDescriptor(
-      name='state', full_name='Cities.state', index=1,
+      name='state', full_name='CitiesC.state', index=1,
       number=2, type=9, cpp_type=9, label=1,
       has_default_value=False, default_value=b"".decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
     _descriptor.FieldDescriptor(
-      name='name', full_name='Cities.name', index=2,
+      name='name', full_name='CitiesC.name', index=2,
       number=3, type=9, cpp_type=9, label=1,
       has_default_value=False, default_value=b"".decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
@@ -92,7 +92,7 @@ _CITIES = _descriptor.Descriptor(
   oneofs=[
   ],
   serialized_start=33,
-  serialized_end=82,
+  serialized_end=83,
 )
 
 
@@ -144,8 +144,8 @@ _STATES = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=84,
-  serialized_end=160,
+  serialized_start=85,
+  serialized_end=162,
 )
 
 
@@ -204,8 +204,8 @@ _COUNTRYREQUEST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=162,
-  serialized_end=273,
+  serialized_start=164,
+  serialized_end=275,
 )
 
 
@@ -250,8 +250,8 @@ _COUNTRYTABLEREQUEST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=275,
-  serialized_end=348,
+  serialized_start=277,
+  serialized_end=350,
 )
 
 
@@ -282,8 +282,8 @@ _COUNTRYMULTIPLERESPONSE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=350,
-  serialized_end=409,
+  serialized_start=352,
+  serialized_end=411,
 )
 
 
@@ -342,16 +342,16 @@ _COUNTRYTABLERESPONSE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=411,
-  serialized_end=537,
+  serialized_start=413,
+  serialized_end=539,
 )
 
-_STATES.fields_by_name['cities'].message_type = _CITIES
+_STATES.fields_by_name['cities'].message_type = _CITIESC
 _COUNTRYREQUEST.fields_by_name['states'].message_type = _STATES
 _COUNTRYMULTIPLERESPONSE.fields_by_name['country'].message_type = _COUNTRYREQUEST
 _COUNTRYTABLERESPONSE.fields_by_name['items'].message_type = _COUNTRYREQUEST
 DESCRIPTOR.message_types_by_name['CountryEmpty'] = _COUNTRYEMPTY
-DESCRIPTOR.message_types_by_name['Cities'] = _CITIES
+DESCRIPTOR.message_types_by_name['CitiesC'] = _CITIESC
 DESCRIPTOR.message_types_by_name['States'] = _STATES
 DESCRIPTOR.message_types_by_name['CountryRequest'] = _COUNTRYREQUEST
 DESCRIPTOR.message_types_by_name['CountryTableRequest'] = _COUNTRYTABLEREQUEST
@@ -366,12 +366,12 @@ CountryEmpty = _reflection.GeneratedProtocolMessageType('CountryEmpty', (_messag
   })
 _sym_db.RegisterMessage(CountryEmpty)
 
-Cities = _reflection.GeneratedProtocolMessageType('Cities', (_message.Message,), {
-  'DESCRIPTOR' : _CITIES,
+CitiesC = _reflection.GeneratedProtocolMessageType('CitiesC', (_message.Message,), {
+  'DESCRIPTOR' : _CITIESC,
   '__module__' : 'country_pb2'
-  # @@protoc_insertion_point(class_scope:Cities)
+  # @@protoc_insertion_point(class_scope:CitiesC)
   })
-_sym_db.RegisterMessage(Cities)
+_sym_db.RegisterMessage(CitiesC)
 
 States = _reflection.GeneratedProtocolMessageType('States', (_message.Message,), {
   'DESCRIPTOR' : _STATES,
@@ -417,8 +417,8 @@ _COUNTRY = _descriptor.ServiceDescriptor(
   index=0,
   serialized_options=None,
   create_key=_descriptor._internal_create_key,
-  serialized_start=539,
-  serialized_end=654,
+  serialized_start=541,
+  serialized_end=656,
   methods=[
   _descriptor.MethodDescriptor(
     name='table',
