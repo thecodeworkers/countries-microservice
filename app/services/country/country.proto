@@ -14,7 +14,10 @@ message CountryIdRequest {
 }
 
 message CountryNotIdRequest {
-
+	required string name = 1;
+	required string phone_prefix = 2;
+	required bool active = 3 [default = true];
+	repeated States states = 4;
 }
 
 message States {
