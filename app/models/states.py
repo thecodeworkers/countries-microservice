@@ -16,6 +16,6 @@ class States(Document):
 
         for key in data:
             if isinstance(data[key], list):
-                data[key] = map(lambda datas: RefQuerySet.set_related(RefQuerySet, datas), data[key])
+                data[key] = [RefQuerySet.set_related(RefQuerySet, old_data) for old_data in data[key]]
 
         return dumps(data)
