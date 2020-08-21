@@ -1,18 +1,27 @@
 syntax = "proto2";
+package country;
 
 message CountryEmpty {}
 
-message CitiesC {
+message Cities {
 	required string id = 1;
 	optional string state = 2;
 	optional string name = 3;
+}
+
+message CountryIdRequest {
+	required string id = 1;
+}
+
+message CountryNotIdRequest {
+
 }
 
 message States {
 	required string id = 1;
 	optional string country = 2;
 	required string name = 3;
-	repeated CitiesC cities = 4;
+	repeated Cities cities = 4;
 }
 
 message CountryRequest {
@@ -27,6 +36,10 @@ message CountryTableRequest {
 	required int32 page = 1;
 	optional int32 per_page = 2 [default = 15];
 	optional string search = 3;
+}
+
+message CountryResponse {
+	required CountryRequest country = 1;
 }
 
 message CountryMultipleResponse {
@@ -44,4 +57,8 @@ message CountryTableResponse {
 service Country {
 	rpc table (CountryTableRequest) returns (CountryTableResponse);
 	rpc get_all (CountryEmpty) returns (CountryMultipleResponse);
+	rpc get (CountryIdRequest) returns (CountryResponse);
+	rpc save (CountryNotIdRequest) returns (CountryResponse);
+	rpc update (CountryRequest) returns (CountryResponse);
+	rpc delete (CountryIdRequest) returns (CountryEmpty);
 }

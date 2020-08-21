@@ -11,9 +11,13 @@ class Countries(Document):
     meta = {'queryset_class': RefQuerySet}
 
     def to_json(self):
-        data = RefQuerySet.set_related(RefQuerySet, self.select_related())
+        data = RefQuerySet.set_related(RefQuerySet, self)
         for key in data:
             if isinstance(data[key], list):
-                data[key] = map(lambda datas: RefQuerySet.set_related(RefQuerySet, datas), data[key])
+                data[key] = list(map(lambda datas: RefQuerySet.set_related(RefQuerySet, datas), data[key]))
+                for list_data in data[key]:
+                        for key2 in list_data:
+                            if isinstance(list_data[key2], list):
+                                list_data[key2] = list(map(self.set_related, list_data[key2]))
 
         return dumps(data)

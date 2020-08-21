@@ -18,11 +18,16 @@ class CountryService(CountryServicer):
 
 	def get_all(self, request, context):
 
-		countries = parser_all_object(Countries.objects.all())
-		print(countries)
-		response = country_pb2.CountryMultipleResponse(country=countries)
+		try:
+			countries = parser_all_object(Countries.objects)
+			response = country_pb2.CountryMultipleResponse(country=countries)
 
-		return response
+			return response
+		except Exception as error:
+			print(error)
+			raise Exception(error)
+
+		
 
 def start_country_service():
 	add_CountryServicer_to_server(CountryService(), grpc_server)

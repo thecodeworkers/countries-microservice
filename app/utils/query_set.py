@@ -6,15 +6,13 @@ from bson.json_util import dumps
 class RefQuerySet(QuerySet):
 
     def set_related(self, data):
-        print(data)
-        print(data._data)
+        data.select_related()
         new_data = data._data
         new_data['id'] = str(new_data['id'])
 
         for key in new_data:
             if isinstance(new_data[key], Document) or isinstance(new_data[key], DBRef):
                 new_data[key] = str(new_data[key].id)
-
         return new_data
 
     def get_related(self, datas):
@@ -34,6 +32,5 @@ class RefQuerySet(QuerySet):
         return datas
 
     def to_json(self):
-        data = self.get_related(self.select_related())
-
+        data = self.get_related(self)
         return dumps(data)
