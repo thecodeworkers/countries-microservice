@@ -31,6 +31,7 @@ class CountryService(CountryServicer):
 		try:
 			country = Countries.objects.get(id=request.id)
 			country = parser_one_object(country)
+			
 			response = country_pb2.CountryResponse(country=country)
 
 			return response
@@ -40,8 +41,13 @@ class CountryService(CountryServicer):
 	def save(self, request, context):
 		try:
 			country_object = MessageToDict(request)
+			country_object['phone_prefix'] = country_object['phonePrefix']
+			del country_object['phonePrefix']
+			
 			country = Countries(**country_object)
 			country.save()
+
+			country = parser_one_object(country)
 			response = country_pb2.CountryResponse(country=country)
 
 			return response
@@ -51,11 +57,20 @@ class CountryService(CountryServicer):
 	def update(self, request, context):
 		try:
 			country_object = MessageToDict(request)
+
+			if country_object['phonePrefix']:
+				country_object['phone_prefix'] = country_object['phonePrefix']
+				del country_object['phonePrefix']
+
 			country = Countries.objects.get(id=country_object['id'])
 
 			country.update(**country_object)
+
+			country = Countries.objects.get(id=country.id)
+			country = parser_one_object(country)
 			response = country_pb2.CountryResponse(country=country)
-			return country
+			
+			return response
 		except NotUniqueError as error:
 			exist_code(context, error)
 
@@ -69,6 +84,5 @@ class CountryService(CountryServicer):
 		except Countries.DoesNotExist as error:
 			not_exist_code(context, e)
 		
-
 def start_country_service():
 	add_CountryServicer_to_server(CountryService(), grpc_server)

@@ -18,6 +18,6 @@ class Countries(Document):
                 for list_data in data[key]:
                         for key2 in list_data:
                             if isinstance(list_data[key2], list):
-                                list_data[key2] = list(map(self.set_related, list_data[key2]))
+                                list_data[key2] = list(map(lambda datas: RefQuerySet.set_related(RefQuerySet, datas), list_data[key2]))
 
         return dumps(data)

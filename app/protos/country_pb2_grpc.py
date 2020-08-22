@@ -15,14 +15,34 @@ class CountryStub(object):
             channel: A grpc.Channel.
         """
         self.table = channel.unary_unary(
-                '/Country/table',
+                '/country.Country/table',
                 request_serializer=country__pb2.CountryTableRequest.SerializeToString,
                 response_deserializer=country__pb2.CountryTableResponse.FromString,
                 )
         self.get_all = channel.unary_unary(
-                '/Country/get_all',
+                '/country.Country/get_all',
                 request_serializer=country__pb2.CountryEmpty.SerializeToString,
                 response_deserializer=country__pb2.CountryMultipleResponse.FromString,
+                )
+        self.get = channel.unary_unary(
+                '/country.Country/get',
+                request_serializer=country__pb2.CountryIdRequest.SerializeToString,
+                response_deserializer=country__pb2.CountryResponse.FromString,
+                )
+        self.save = channel.unary_unary(
+                '/country.Country/save',
+                request_serializer=country__pb2.CountryNotIdRequest.SerializeToString,
+                response_deserializer=country__pb2.CountryResponse.FromString,
+                )
+        self.update = channel.unary_unary(
+                '/country.Country/update',
+                request_serializer=country__pb2.CountryRequest.SerializeToString,
+                response_deserializer=country__pb2.CountryResponse.FromString,
+                )
+        self.delete = channel.unary_unary(
+                '/country.Country/delete',
+                request_serializer=country__pb2.CountryIdRequest.SerializeToString,
+                response_deserializer=country__pb2.CountryEmpty.FromString,
                 )
 
 
@@ -41,6 +61,30 @@ class CountryServicer(object):
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
+    def get(self, request, context):
+        """Missing associated documentation comment in .proto file."""
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def save(self, request, context):
+        """Missing associated documentation comment in .proto file."""
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def update(self, request, context):
+        """Missing associated documentation comment in .proto file."""
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def delete(self, request, context):
+        """Missing associated documentation comment in .proto file."""
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
 
 def add_CountryServicer_to_server(servicer, server):
     rpc_method_handlers = {
@@ -54,9 +98,29 @@ def add_CountryServicer_to_server(servicer, server):
                     request_deserializer=country__pb2.CountryEmpty.FromString,
                     response_serializer=country__pb2.CountryMultipleResponse.SerializeToString,
             ),
+            'get': grpc.unary_unary_rpc_method_handler(
+                    servicer.get,
+                    request_deserializer=country__pb2.CountryIdRequest.FromString,
+                    response_serializer=country__pb2.CountryResponse.SerializeToString,
+            ),
+            'save': grpc.unary_unary_rpc_method_handler(
+                    servicer.save,
+                    request_deserializer=country__pb2.CountryNotIdRequest.FromString,
+                    response_serializer=country__pb2.CountryResponse.SerializeToString,
+            ),
+            'update': grpc.unary_unary_rpc_method_handler(
+                    servicer.update,
+                    request_deserializer=country__pb2.CountryRequest.FromString,
+                    response_serializer=country__pb2.CountryResponse.SerializeToString,
+            ),
+            'delete': grpc.unary_unary_rpc_method_handler(
+                    servicer.delete,
+                    request_deserializer=country__pb2.CountryIdRequest.FromString,
+                    response_serializer=country__pb2.CountryEmpty.SerializeToString,
+            ),
     }
     generic_handler = grpc.method_handlers_generic_handler(
-            'Country', rpc_method_handlers)
+            'country.Country', rpc_method_handlers)
     server.add_generic_rpc_handlers((generic_handler,))
 
 
@@ -74,7 +138,7 @@ class Country(object):
             wait_for_ready=None,
             timeout=None,
             metadata=None):
-        return grpc.experimental.unary_unary(request, target, '/Country/table',
+        return grpc.experimental.unary_unary(request, target, '/country.Country/table',
             country__pb2.CountryTableRequest.SerializeToString,
             country__pb2.CountryTableResponse.FromString,
             options, channel_credentials,
@@ -90,8 +154,72 @@ class Country(object):
             wait_for_ready=None,
             timeout=None,
             metadata=None):
-        return grpc.experimental.unary_unary(request, target, '/Country/get_all',
+        return grpc.experimental.unary_unary(request, target, '/country.Country/get_all',
             country__pb2.CountryEmpty.SerializeToString,
             country__pb2.CountryMultipleResponse.FromString,
+            options, channel_credentials,
+            call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def get(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/country.Country/get',
+            country__pb2.CountryIdRequest.SerializeToString,
+            country__pb2.CountryResponse.FromString,
+            options, channel_credentials,
+            call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def save(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/country.Country/save',
+            country__pb2.CountryNotIdRequest.SerializeToString,
+            country__pb2.CountryResponse.FromString,
+            options, channel_credentials,
+            call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def update(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/country.Country/update',
+            country__pb2.CountryRequest.SerializeToString,
+            country__pb2.CountryResponse.FromString,
+            options, channel_credentials,
+            call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def delete(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/country.Country/delete',
+            country__pb2.CountryIdRequest.SerializeToString,
+            country__pb2.CountryEmpty.FromString,
             options, channel_credentials,
             call_credentials, compression, wait_for_ready, timeout, metadata)

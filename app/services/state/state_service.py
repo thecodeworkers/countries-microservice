@@ -9,9 +9,7 @@ from ...models import States, Countries
 class StateService(state_pb2_grpc.StateServicer):
     def table(self, request, context):
         try:
-            
             states = States.objects
-
             response = paginate(states, request.page, request.per_page)
 
             response = state_pb2.StateTableResponse(**response)
