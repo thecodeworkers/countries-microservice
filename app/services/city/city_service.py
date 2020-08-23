@@ -31,7 +31,9 @@ class CityService(city_pb2_grpc.CityServicer):
         try:
             city = Cities.objects.get(id=request.id)
             city = parser_one_object(city)
+            print(city)
             response = city_pb2.CityResponse(city=city)
+            print(response)
 
             return response
 
