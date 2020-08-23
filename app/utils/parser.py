@@ -20,6 +20,8 @@ def __commonParser(model):
 
 
 def __iterate_object(object):
+
+    object = __reference_object(object)
     
     if '_id' in object:
         object['id'] = object['_id']
@@ -27,3 +29,11 @@ def __iterate_object(object):
 
     return object
 
+def __reference_object(object):
+
+    for key in object:
+        if isinstance(object[key], dict):
+            if '$oid' in object[key]:
+                object[key] = object[key]['$oid']
+    
+    return object
