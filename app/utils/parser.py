@@ -20,7 +20,6 @@ def __commonParser(model):
 
 
 def __iterate_object(object):
-
     object = __reference_object(object)
     
     if '_id' in object:

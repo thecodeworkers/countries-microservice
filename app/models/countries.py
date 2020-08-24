@@ -8,16 +8,18 @@ class Countries(Document):
     phone_prefix = StringField(max_length=10)
     active = BooleanField(required=True, default=1)
     states = ListField(ReferenceField(States, dbref=False))
+
     meta = {'queryset_class': RefQuerySet}
 
     def to_json(self):
-        data = RefQuerySet.set_related(RefQuerySet, self)
+        data = RefQuerySet.set_related(RefQuerySet, self.select_related())
+
         for key in data:
             if isinstance(data[key], list):
                 data[key] = list(map(lambda datas: RefQuerySet.set_related(RefQuerySet, datas), data[key]))
                 for list_data in data[key]:
-                        for key2 in list_data:
-                            if isinstance(list_data[key2], list):
-                                list_data[key2] = list(map(lambda datas: RefQuerySet.set_related(RefQuerySet, datas), list_data[key2]))
+                    for key2 in list_data:
+                        if isinstance(list_data[key2], list):
+                            list_data[key2] = list(map(lambda datas: RefQuerySet.set_related(RefQuerySet, datas), list_data[key2]))
 
         return dumps(data)

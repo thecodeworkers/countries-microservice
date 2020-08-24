@@ -31,9 +31,7 @@ class CityService(city_pb2_grpc.CityServicer):
         try:
             city = Cities.objects.get(id=request.id)
             city = parser_one_object(city)
-            print(city)
             response = city_pb2.CityResponse(city=city)
-            print(response)
 
             return response
 
@@ -80,8 +78,8 @@ class CityService(city_pb2_grpc.CityServicer):
 
             city = Cities.objects.get(id=city.id)
 
-            old_state.update(pull__states=city)
-            state.update(push__states=city)
+            old_state.update(pull__cities=city)
+            state.update(push__cities=city)
 
             city = parser_one_object(city)
             response = city_pb2.CityResponse(city=city)
