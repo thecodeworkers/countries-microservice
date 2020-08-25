@@ -6,7 +6,7 @@ class RefQuerySet(QuerySet):
 
     def set_related(self, data):
         
-        if not 'cities' in data:
+        if not 'cities' in data and not isinstance(data, dict):
             new_data = data._data
             new_data = {key: str(new_data[key].id) if isinstance(new_data[key], Document) or isinstance(new_data[key], DBRef) else new_data[key] for key in new_data}
         else:
@@ -17,9 +17,8 @@ class RefQuerySet(QuerySet):
         return new_data
 
     def get_related(self, data):
-        
+
         data = self.set_related(data)
-        
         data = {key: [self.set_related(old_data) for old_data in data[key]] if isinstance(data[key], list) else data[key] for key in data}
             
         return data
