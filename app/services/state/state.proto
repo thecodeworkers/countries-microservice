@@ -1,0 +1,59 @@
+syntax = "proto2";
+
+message StateEmpty {}
+
+message StateIdRequest {
+	required string id = 1;
+}
+
+message Cities {
+	required string id = 1;
+	optional string state = 2;
+	optional string name = 3;
+}
+
+message StateNotIdRequest {
+	required string country = 1;
+	required string name = 2;
+	repeated Cities cities = 3;
+}
+
+
+message StateRequest {
+	required string id = 1;
+	required string country = 2;
+	required string name = 3;
+	repeated Cities cities = 4;
+}
+
+
+message StateTableRequest {
+	required int32 page = 1;
+	optional int32 per_page = 2 [default = 15];
+	optional string search = 3;
+}
+
+message StateResponse {
+	required StateRequest state = 1;
+}
+
+message StateMultipleResponse {
+	repeated StateRequest state = 1;
+}
+
+message StateTableResponse {
+	repeated StateRequest items = 1;
+	required int32 page = 2;
+	required int32 per_page = 3;
+	required int32 total_items = 4;
+	required int32 num_pages = 5;
+}
+
+service State {
+	rpc table (StateTableRequest) returns (StateTableResponse);
+	rpc get_all (StateEmpty) returns (StateMultipleResponse);
+	rpc get (StateIdRequest) returns (StateResponse);
+	rpc save (StateNotIdRequest) returns (StateResponse);
+	rpc update (StateRequest) returns (StateResponse);
+	rpc delete (StateIdRequest) returns (StateEmpty);
+}

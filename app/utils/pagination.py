@@ -4,6 +4,7 @@ from .parser import parser_all_object
 def paginate(queryset, page=1, per_page=15):
     skip = (page - 1) * per_page
     limit = per_page
+    
     total_items = queryset.count()
 
     total_objects = queryset.limit(limit).skip(skip)
