@@ -2,6 +2,7 @@ from google.protobuf.json_format import MessageToDict
 from mongoengine.queryset import NotUniqueError
 from ...protos import city_pb2, city_pb2_grpc
 from ...utils import parser_all_object, parser_one_object, not_exist_code, exist_code, paginate
+from ...utils.validate_session import is_auth
 from ..bootstrap import grpc_server
 from ...models import Cities, States
 
@@ -9,7 +10,9 @@ from ...models import Cities, States
 class CityService(city_pb2_grpc.CityServicer):
     def table(self, request, context):
         try:
-            
+            metadata = dict(context.invocation_metadata())
+            is_auth(metadata['auth_token'], '03_city_table')
+
             cities = Cities.objects
 
             response = paginate(cities, request.page, request.per_page)
@@ -22,6 +25,8 @@ class CityService(city_pb2_grpc.CityServicer):
             raise Exception(error)
 
     def get_all(self, request, context):
+        metadata = dict(context.invocation_metadata())
+        is_auth(metadata['auth_token'],'03_city_get_all')
         cities = parser_all_object(Cities.objects.all())
         response = city_pb2.CityMultipleResponse(city=cities)
 
@@ -29,6 +34,8 @@ class CityService(city_pb2_grpc.CityServicer):
 
     def get(self, request, context):
         try:
+            metadata = dict(context.invocation_metadata())
+            is_auth(metadata['auth_token'], '03_city_get')
             city = Cities.objects.get(id=request.id)
             city = parser_one_object(city)
             response = city_pb2.CityResponse(city=city)
@@ -40,6 +47,8 @@ class CityService(city_pb2_grpc.CityServicer):
 
     def save(self, request, context):
         try:
+            metadata = dict(context.invocation_metadata())
+            is_auth(metadata['auth_token'], '03_city_save')
             city_object = MessageToDict(request)
 
             state = States.objects.get(id=city_object['state'])
@@ -63,6 +72,8 @@ class CityService(city_pb2_grpc.CityServicer):
 
     def update(self, request, context):
         try:
+            metadata = dict(context.invocation_metadata())
+            is_auth(metadata['auth_token'], '03_city_update')
             city_object = MessageToDict(request)
             city = Cities.objects.get(id=city_object['id'])
 
@@ -91,6 +102,9 @@ class CityService(city_pb2_grpc.CityServicer):
 
     def delete(self, request, context):
         try:
+            metadata = dict(context.invocation_metadata())
+            is_auth(metadata['auth_token'], '03_city_delete')
+
             city = Cities.objects.get(id=request.id)
 
             state = States.objects.get(id=city.state.id)

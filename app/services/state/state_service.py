@@ -2,6 +2,7 @@ from google.protobuf.json_format import MessageToDict
 from mongoengine.queryset import NotUniqueError
 from ...protos import state_pb2, state_pb2_grpc
 from ...utils import parser_all_object, parser_one_object, not_exist_code, exist_code, paginate
+from ...utils.validate_session import is_auth
 from ..bootstrap import grpc_server
 from ...models import States, Countries
 
@@ -9,6 +10,8 @@ from ...models import States, Countries
 class StateService(state_pb2_grpc.StateServicer):
     def table(self, request, context):
         try:
+            metadata = dict(context.invocation_metadata())
+            is_auth(metadata['auth_token'], '03_state_table')
             
             states = States.objects
 
@@ -22,6 +25,8 @@ class StateService(state_pb2_grpc.StateServicer):
             raise Exception(error)
 
     def get_all(self, request, context):
+        metadata = dict(context.invocation_metadata())
+        is_auth(metadata['auth_token'], '03_state_get_all')
         states = parser_all_object(States.objects.all())
         response = state_pb2.StateMultipleResponse(state=states)
 
@@ -29,6 +34,8 @@ class StateService(state_pb2_grpc.StateServicer):
 
     def get(self, request, context):
         try:
+            metadata = dict(context.invocation_metadata())
+            is_auth(metadata['auth_token'], '03_state_get')
             state = States.objects.get(id=request.id)
             state = parser_one_object(state)
             response = state_pb2.StateResponse(state=state)
@@ -40,6 +47,8 @@ class StateService(state_pb2_grpc.StateServicer):
 
     def save(self, request, context):
         try:
+            metadata = dict(context.invocation_metadata())
+            is_auth(metadata['auth_token'], '03_state_save')
             state_object = MessageToDict(request)
 
             country = Countries.objects.get(id=state_object['country'])
@@ -63,6 +72,8 @@ class StateService(state_pb2_grpc.StateServicer):
 
     def update(self, request, context):
         try:
+            metadata = dict(context.invocation_metadata())
+            is_auth(metadata['auth_token'], '03_state_update')
             state_object = MessageToDict(request)
             state = States.objects.get(id=state_object['id'])
 
@@ -92,6 +103,8 @@ class StateService(state_pb2_grpc.StateServicer):
 
     def delete(self, request, context):
         try:
+            metadata = dict(context.invocation_metadata())
+            is_auth(metadata['auth_token'], '03_state_delete')
             state = States.objects.get(id=request.id)
 
             country = Countries.objects.get(id=state.country.id)
