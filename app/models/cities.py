@@ -3,7 +3,7 @@ from ..utils import RefQuerySet
 from bson.json_util import dumps
 class Cities(Document):
 	state = ReferenceField('States', dbref=False)
-	name = StringField(max_length=100, required=True)
+	name = StringField(min_length=2, max_length=100, required=True)
 
 	meta = {'queryset_class': RefQuerySet}
 	def to_json(self):
@@ -12,8 +12,8 @@ class Cities(Document):
 		for key in data:
 			if key == 'state':
 				data[key] = str(data[key].id)
-		
+
 		data['_id'] = data['id']
 		del data['id']
-		
+
 		return dumps(data)
