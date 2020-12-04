@@ -9,11 +9,10 @@ class Cities(Document):
 	def to_json(self):
 
 		data = self._data
-		for key in data:
-			if key == 'state':
-				data[key] = str(data[key].id)
-
+		
+		data['state'] = str(data['state'].id)
 		data['_id'] = data['id']
+
 		del data['id']
 
 		return dumps(data)
