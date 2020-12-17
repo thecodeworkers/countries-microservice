@@ -4,7 +4,8 @@ from ...protos import state_pb2, state_pb2_grpc
 from ...utils import parser_all_object, parser_one_object, not_exist_code, exist_code, paginate, parser_context
 from ...utils.validate_session import is_auth
 from ..bootstrap import grpc_server
-from ...models import States, Countries
+from bson.objectid import ObjectId
+from ...models import States, Countries, Cities
 
 
 class StateService(state_pb2_grpc.StateServicer):
@@ -14,6 +15,19 @@ class StateService(state_pb2_grpc.StateServicer):
             is_auth(auth_token, '03_state_table')
 
             states = States.objects
+
+            if request.search:
+                cities = Cities.objects(__raw__={'$or': [{'name': request.search}, {'_id': ObjectId(
+                    request.search) if ObjectId.is_valid(request.search) else request.search}]})
+                
+                states = States.objects(__raw__={'$or': [
+                    {'name': request.search},
+                    {'country': ObjectId(request.search) if ObjectId.is_valid(
+                        request.search) else request.search},
+                    {'cities': { '$in': [city.id for city in cities] if cities.count() else [request.search]}},
+                    {'_id': ObjectId(request.search) if ObjectId.is_valid(
+                        request.search) else request.search}
+                ]})
 
             response = paginate(states, request.page, request.per_page)
 
@@ -87,7 +101,6 @@ class StateService(state_pb2_grpc.StateServicer):
             state_object['country'] = country
 
             old_country = Countries.objects.get(id=state.country.id)
-
 
             if state:
                 del state_object['id']

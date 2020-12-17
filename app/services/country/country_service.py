@@ -4,6 +4,7 @@ from ...protos import CountryServicer, CountryMultipleResponse, add_CountryServi
 from ...utils import parser_all_object, paginate, parser_one_object, not_exist_code, exist_code, parser_context
 from ...utils.validate_session import is_auth
 from ...models import Countries, States, Cities
+from bson.objectid import ObjectId
 from ..bootstrap import grpc_server
 
 class CountryService(CountryServicer):
@@ -13,6 +14,24 @@ class CountryService(CountryServicer):
             is_auth(auth_token, '03_country_table')
 
             countries = Countries.objects
+
+            if request.search:
+                cities = Cities.objects(__raw__={'$or': [{'name': request.search}, {'_id': ObjectId(
+                    request.search) if ObjectId.is_valid(request.search) else request.search}]})
+
+                states = States.objects(__raw__={'$or': [
+                    {'name': request.search},
+                    {'cities': {'$in': [city.id for city in cities] if cities.count() else [request.search]}},
+                    {'_id': ObjectId(request.search) if ObjectId.is_valid(
+                        request.search) else request.search}
+                ]})
+                
+                countries = Countries.objects(__raw__= { '$or': [
+                    { 'name' : request.search}, 
+                    {'states': {'$in': [state.id for state in states] if states.count() else [request.search]}}, 
+                    {'_id': ObjectId(request.search) if ObjectId.is_valid(request.search) else request.search}
+                ]})
+
             response = paginate(countries, request.page, request.per_page)
             response = country_pb2.CountryTableResponse(**response)
 
