@@ -4,6 +4,7 @@ from ...protos import city_pb2, city_pb2_grpc
 from ...utils import parser_all_object, parser_one_object, not_exist_code, exist_code, paginate, parser_context
 from ...utils.validate_session import is_auth
 from ..bootstrap import grpc_server
+from bson.objectid import ObjectId
 from ...models import Cities, States
 
 
@@ -14,6 +15,16 @@ class CityService(city_pb2_grpc.CityServicer):
             is_auth(auth_token, '03_city_table')
 
             cities = Cities.objects
+
+            search = request.search
+            
+            if search:
+                cities = Cities.objects(__raw__= { '$or': [
+                    { 'name' : search}, 
+                    {'state': ObjectId(search) if ObjectId.is_valid(search) else search},
+                    {'_id': ObjectId(search) if ObjectId.is_valid(search) else search}
+                ]})
+
             response = paginate(cities, request.page, request.per_page)
 
             response = city_pb2.CityTableResponse(**response)
