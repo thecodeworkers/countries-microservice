@@ -16,11 +16,13 @@ class CityService(city_pb2_grpc.CityServicer):
 
             cities = Cities.objects
 
-            if request.search:
+            search = request.search
+            
+            if search:
                 cities = Cities.objects(__raw__= { '$or': [
-                    { 'name' : request.search}, 
-                    {'state': ObjectId(request.search) if ObjectId.is_valid(request.search) else request.search},
-                    {'_id': ObjectId(request.search) if ObjectId.is_valid(request.search) else request.search}
+                    { 'name' : search}, 
+                    {'state': ObjectId(search) if ObjectId.is_valid(search) else search},
+                    {'_id': ObjectId(search) if ObjectId.is_valid(search) else search}
                 ]})
 
             response = paginate(cities, request.page, request.per_page)

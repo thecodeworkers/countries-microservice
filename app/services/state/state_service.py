@@ -16,17 +16,19 @@ class StateService(state_pb2_grpc.StateServicer):
 
             states = States.objects
 
-            if request.search:
-                cities = Cities.objects(__raw__={'$or': [{'name': request.search}, {'_id': ObjectId(
-                    request.search) if ObjectId.is_valid(request.search) else request.search}]})
+            search = request.search
+
+            if search:
+                cities = Cities.objects(__raw__={'$or': [{'name': search}, {'_id': ObjectId(
+                    search) if ObjectId.is_valid(search) else search}]})
                 
                 states = States.objects(__raw__={'$or': [
-                    {'name': request.search},
-                    {'country': ObjectId(request.search) if ObjectId.is_valid(
-                        request.search) else request.search},
-                    {'cities': { '$in': [city.id for city in cities] if cities.count() else [request.search]}},
-                    {'_id': ObjectId(request.search) if ObjectId.is_valid(
-                        request.search) else request.search}
+                    {'name': search},
+                    {'country': ObjectId(search) if ObjectId.is_valid(
+                        search) else search},
+                    {'cities': { '$in': [city.id for city in cities] if cities.count() else [search]}},
+                    {'_id': ObjectId(search) if ObjectId.is_valid(
+                        search) else search}
                 ]})
 
             response = paginate(states, request.page, request.per_page)
