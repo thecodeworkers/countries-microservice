@@ -3,7 +3,6 @@ from ..utils import RefQuerySet, to_json
 from .states import States
 from bson.json_util import dumps
 
-
 class Countries(Document):
     name = StringField(min_length=2, max_length=100, required=True)
     phone_prefix = StringField(min_length=2, max_length=10, required=True)
@@ -15,5 +14,4 @@ class Countries(Document):
     }
 
     def to_json(self):
-
         return to_json(self)

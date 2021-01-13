@@ -2,7 +2,6 @@ from mongoengine import Document, StringField, ListField, ReferenceField
 from ..utils import RefQuerySet, to_json
 from .cities import Cities
 
-
 class States(Document):
     country = ReferenceField('Countries', dbref=False)
     name = StringField(min_length=2, max_length=100, required=True)
@@ -11,5 +10,4 @@ class States(Document):
     meta = {'queryset_class': RefQuerySet}
 
     def to_json(self):
-
         return to_json(self)
