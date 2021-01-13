@@ -7,7 +7,7 @@ class RefQuerySet(QuerySet):
         data = "[%s]" % (",".join([value.to_json() for value in self]))
         return data
 
-def pagination(page, per_page):
+def pagination(page, per_page, sort_results):
     page = int(page) if page else 1
     per_page = int(per_page) if per_page else 15
 
@@ -26,6 +26,7 @@ def pagination(page, per_page):
                     }
                 ],
                 "results": [
+                    { "$sort": sort_results },
                     { "$skip": skip },
                     { "$limit": limit }
                 ]

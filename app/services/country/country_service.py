@@ -84,7 +84,7 @@ class CountryService(CountryServicer):
                 },
             ]
 
-            pipeline = pipeline + pagination(request.page, request.per_page)
+            pipeline = pipeline + pagination(request.page, request.per_page, { "name": 1 })
 
             countriesone = Countries.objects
             countries = Countries.objects().aggregate(pipeline)
