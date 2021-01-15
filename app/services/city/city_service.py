@@ -1,7 +1,7 @@
 from google.protobuf.json_format import MessageToDict
 from mongoengine.queryset import NotUniqueError
 from ...protos import city_pb2, city_pb2_grpc
-from ...utils import parser_all_object, parser_one_object, not_exist_code, exist_code, paginate, parser_context
+from ...utils import parser_all_object, parser_one_object, not_exist_code, exist_code, paginate, parser_context, pagination, default_paginate_schema
 from ...utils.validate_session import is_auth
 from ..bootstrap import grpc_server
 from bson.objectid import ObjectId
@@ -17,17 +17,37 @@ class CityService(city_pb2_grpc.CityServicer):
             cities = Cities.objects
 
             search = request.search
-            
-            if search:
-                cities = Cities.objects(__raw__= { '$or': [
-                    { 'name' : search}, 
-                    {'state': ObjectId(search) if ObjectId.is_valid(search) else search},
-                    {'_id': ObjectId(search) if ObjectId.is_valid(search) else search}
-                ]})
 
-            response = paginate(cities, request.page, request.per_page)
+            pipeline = [
+                {
+                    "$match": {
+                        "$or": [
+                            {"name": {"$regex": search, "$options": "i"}},
+                        ]
+                    }
+                },
+                {
+                    "$group": {
+                        "_id": "$_id",
+                        "id": {"$first": {"$toString": "$_id"}},
+                        "name": {"$first": "$name"},
+                        "state": {"$first": {"$toString": "$state"}},
+                    }
+                }, 
+                {
+                    "$project": {
+                        "_id": 0
+                    }
+                }
+            ]
 
-            response = city_pb2.CityTableResponse(**response)
+            pipeline = pipeline + \
+                pagination(request.page, request.per_page, {"name": 1})
+
+            response = Cities.objects().aggregate(pipeline)
+
+            response = city_pb2.CityTableResponse(
+                **default_paginate_schema(response, request.page, request.per_page))
 
             return response
 

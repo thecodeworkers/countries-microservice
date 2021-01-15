@@ -86,10 +86,8 @@ class CountryService(CountryServicer):
 
             pipeline = pipeline + pagination(request.page, request.per_page, { "name": 1 })
 
-            countriesone = Countries.objects
             countries = Countries.objects().aggregate(pipeline)
 
-            response = paginate(countriesone, request.page, request.per_page)
             response = country_pb2.CountryTableResponse(**default_paginate_schema(countries, request.page, request.per_page))
 
             return response

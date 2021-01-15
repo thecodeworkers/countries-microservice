@@ -1,7 +1,7 @@
 from google.protobuf.json_format import MessageToDict
 from mongoengine.queryset import NotUniqueError
 from ...protos import state_pb2, state_pb2_grpc
-from ...utils import parser_all_object, parser_one_object, not_exist_code, exist_code, paginate, parser_context
+from ...utils import parser_all_object, parser_one_object, not_exist_code, exist_code, paginate, parser_context, pagination, default_paginate_schema
 from ...utils.validate_session import is_auth
 from ..bootstrap import grpc_server
 from bson.objectid import ObjectId
@@ -14,26 +14,53 @@ class StateService(state_pb2_grpc.StateServicer):
             auth_token = parser_context(context, 'auth_token')
             is_auth(auth_token, '03_state_table')
 
-            states = States.objects
-
             search = request.search
 
-            if search:
-                cities = Cities.objects(__raw__={'$or': [{'name': search}, {'_id': ObjectId(
-                    search) if ObjectId.is_valid(search) else search}]})
-                
-                states = States.objects(__raw__={'$or': [
-                    {'name': search},
-                    {'country': ObjectId(search) if ObjectId.is_valid(
-                        search) else search},
-                    {'cities': { '$in': [city.id for city in cities] if cities.count() else [search]}},
-                    {'_id': ObjectId(search) if ObjectId.is_valid(
-                        search) else search}
-                ]})
+            pipeline = [
+                {
+                    "$lookup": {
+                        "from": "cities",
+                        "localField": "cities",
+                        "foreignField": "_id",
+					    "as": "cities"
+                    }
+                },
+                { "$unwind": "$cities" },
+                {
+                    "$group": {
+                        "_id": "$_id",
+                        "id": { "$first": { "$toString": "$_id" } },
+                        "country": { "$first": { "$toString": "$country" } },
+                        "name": { "$first": "$name" },
+                        "cities": {
+                            "$push": {
+                                "id": { "$toString": "$cities._id" },
+                                "state": { "$toString": "$cities.state" },
+                                "name": "$cities.name",
+                            }
+                        },
+                    }
+                },
+                {
+                    "$project": {
+                        "_id": 0,
+                    }
+                },
+                {
+                    "$match": {
+                        "$or": [
+                            { "name": { "$regex": search, "$options": "i" } },
+                            { "cities.name": { "$regex": search, "$options": "i" } }
+                        ]
+                    }
+                },
+            ]
 
-            response = paginate(states, request.page, request.per_page)
+            pipeline = pipeline + pagination(request.page, request.per_page, { "name": 1 })
 
-            response = state_pb2.StateTableResponse(**response)
+            states = States.objects().aggregate(pipeline)
+
+            response = state_pb2.StateTableResponse(**default_paginate_schema(states, request.page, request.per_page))
 
             return response
 
