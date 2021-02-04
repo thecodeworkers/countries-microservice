@@ -55,6 +55,7 @@ class CountryService(CountryServicer):
                         "_id": "$_id",
                         "id": { "$first": { "$toString": "$_id" } },
                         "name": { "$first": "$name" },
+                        "code": { "$first": "$code"},
                         "phone_prefix": { "$first": "$phone_prefix" },
                         "active": { "$first": "$active" },
                         "states": {

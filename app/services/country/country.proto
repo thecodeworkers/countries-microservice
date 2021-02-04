@@ -15,9 +15,10 @@ message CountryIdRequest {
 
 message CountryNotIdRequest {
 	required string name = 1;
-	required string phone_prefix = 2;
-	required bool active = 3 [default = true];
-	repeated States states = 4;
+	required int32 code = 2;
+	required string phone_prefix = 3;
+	required bool active = 4 [default = true];
+	repeated States states = 5;
 }
 
 message States {
@@ -30,9 +31,10 @@ message States {
 message CountryRequest {
 	required string id = 1;
 	required string name = 2;
-	required string phone_prefix = 3;
-	optional bool active = 4 [default = true];
-	repeated States states = 5;
+	required int32 code = 3;
+	required string phone_prefix = 4;
+	optional bool active = 5 [default = true];
+	repeated States states = 6;
 }
 
 message CountryTableRequest {
